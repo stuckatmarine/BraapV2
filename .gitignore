@@ -27,6 +27,7 @@ ExportedObj/
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
+*.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
@@ -34,3 +35,20 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+BraapV2/Assets/Scripts/GameManager.cs
+BraapV2/Assets/Scripts/GameManager.cs.meta
+BraapV2/Assets/Scripts/iapManager.cs
+BraapV2/Assets/Scripts/iapManager.cs.meta
+/BraapV2/Assets/Scripts/sled.cs.meta
+/BraapV2/Assets/Scripts/destroCreditsScript.cs
+/BraapV2/Assets/Scripts/destroCreditsScript.cs.meta
+/BraapV2/Assets/Scripts/facebook.cs
+/BraapV2/Assets/Scripts/facebook.cs.meta
+/BraapV2/Assets/Scripts/GameManager.cs.meta
+/BraapV2/Assets/Scripts/glgAdManager.cs
+/BraapV2/Assets/Scripts/glgAdManager.cs.meta
+/BraapV2/Assets/Scripts/iapManager.cs
+/BraapV2/Assets/Scripts/iapManager.cs.meta
+/BraapV2/Assets/Scripts/sled.cs
+/BraapV2/Assets/Scripts/*.meta
