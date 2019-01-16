@@ -3,13 +3,8 @@ using System.Collections;
 
 public class audioButton : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void CycleAudio()
+    {
+        GameObject.Find("manager").GetComponent<GameManager>().CycleAudio(true);
+    }
 }

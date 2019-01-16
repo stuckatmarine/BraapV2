@@ -16,8 +16,7 @@ public class sledController : MonoBehaviour {
     public GameObject gTerrain;
     public GameObject gCameraObject;
     public GameObject gCenterParent;
-    public GameObject gCrashPopup;
-    
+    public GameObject gCrashPopup; 
 
     // Audio
     public AudioClip mirror;
@@ -50,8 +49,8 @@ public class sledController : MonoBehaviour {
     public bool bRightDown = false;
     private bool bLeftDown = false;
     private bool braapMute = false;
-    private bool bWater = false;
-    private bool bWaterApplied = false;
+    public bool bWater = false;
+    public bool bWaterApplied = false;
     public float fTurnWaterDrag = 0.4f;
     private bool bCrashSound = false;
     private int sledColor;
@@ -70,7 +69,11 @@ public class sledController : MonoBehaviour {
         sledColor = gGameManager.GetComponent<GameManager>().iSledColor;
         iSuperSled = gGameManager.GetComponent<GameManager>().iSuperSled;
 
-        if (eState == 3)
+        if (eState <= 2)
+        {
+            gGameManager.GetComponent<GameManager>().SetGamePanelDisabled();
+        }
+        else if (eState == 3)
         {
             gGameManager.GetComponent<GameManager>().SetLoadingDisabled();
         }
@@ -141,15 +144,6 @@ public class sledController : MonoBehaviour {
                     bRightDown = false;
                     bLeftDown = false;
                 }
-
-              /*  if (Input.GetKey(KeyCode.Space))
-                {
-                    bBraapDown = true;
-                }
-                else
-                {
-                    bBraapDown = false;
-                }*/
             }
 
             // water condition
@@ -162,6 +156,7 @@ public class sledController : MonoBehaviour {
 
             // speedometer
             fPointerValue = (fMinPointer + (fMaxPointer - fMinPointer) * (rb.velocity.magnitude / fBraapPower) * fPointMultiplier);
+            fCurrentSpeed = rb.velocity.magnitude;
             gPointer.transform.eulerAngles = new Vector3(0, 0, fPointerValue);
 
             // sled controls
@@ -170,6 +165,7 @@ public class sledController : MonoBehaviour {
                 rb.AddForce(transform.up * fBraapPower);
 
                 fCurrentScore += fScoreIncriment; // incriment score variable
+                gCurrentScoreText.text = fCurrentScore.ToString("F" + 1.ToString());
                 //   scoreString.text = braapMeter.ToString("F" + 1.ToString()); // score update
 
                 //braap turning, more torque then normal turning
@@ -196,6 +192,7 @@ public class sledController : MonoBehaviour {
                     anim.SetInteger("turn", 0);
                     fTurnRampUpAmount = 1.0f;
                 }
+                
             }
             else
             {
@@ -245,7 +242,7 @@ public class sledController : MonoBehaviour {
     {
         gGameManager.GetComponent<GameManager>().StopGame();
                 
-        GameObject.Find("Camera").GetComponent<CameraFollow>().crashed = true; //stopping camera motion and sound
+        GameObject.Find("GameCamera").GetComponent<CameraFollow>().crashed = true; //stopping camera motion and sound
         rb.velocity = new Vector2(0f, 0f); // stop sled
         anim.SetBool("crashed", true); // crashed animation
 
@@ -261,21 +258,35 @@ public class sledController : MonoBehaviour {
             GetComponent<AudioSource>().volume = 0f; // mute music
         }
 
-        //if volume on play crash sound
-        if (eAudioState <= 1)
+        if (type == "tree")
         {
-            int num = Random.Range(0, 2);
-            if (num == 0)
+            //if volume on play crash sound
+            if (eAudioState <= 1)
             {
-                AudioSource.PlayClipAtPoint(mirror, transform.position);
+                int num = Random.Range(0, 2);
+                if (num == 0)
+                {
+                    AudioSource.PlayClipAtPoint(mirror, transform.position);
+                }
+                else if (num == 1)
+                {
+                    AudioSource.PlayClipAtPoint(snap, transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(gunShot, transform.position);
+                }
             }
-            else if (num == 1)
+        }
+        else
+        {
+            gCameraObject.GetComponent<AudioSource>().volume = 0f;
+            anim.GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.2f, 0.2f, 1f);
+            if (eAudioState <= 1)
             {
-                AudioSource.PlayClipAtPoint(snap, transform.position);
-            }
-            else
-            {
-                AudioSource.PlayClipAtPoint(gunShot, transform.position);
+                GetComponent<AudioSource>().Pause();
+                GetComponent<AudioSource>().volume = 1.0f;
+                AudioSource.PlayClipAtPoint(bubbles, transform.position);
             }
         }
 
@@ -286,7 +297,7 @@ public class sledController : MonoBehaviour {
 
     public void BraapSoundOn()
     {
-        if (eAudioState <= 1)
+        if (eAudioState <= 1 && eState == 4)
         {
             GetComponent<AudioSource>().volume = fBraapVolume;
         }
@@ -310,7 +321,8 @@ public class sledController : MonoBehaviour {
     public void BraapButtonDown()
     {
         bBraapDown = true;
-        GetComponent<AudioSource>().volume = fBraapVolume;
+        if (eAudioState != 2 && eState == 4)
+            GetComponent<AudioSource>().volume = fBraapVolume;
     }
 
     //braap, speedboost toggle

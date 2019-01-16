@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class levelManager : MonoBehaviour {
 
     // Scene management
+    public bool skipDelay = false;
     public float changeSceneDelay = 0f;
 
     public void reset()
@@ -14,7 +15,10 @@ public class levelManager : MonoBehaviour {
 
     public void ChangeToScene (int sceneToChangeTo)
     {
-	StartCoroutine(WaitFor(changeSceneDelay, sceneToChangeTo));
+        if (skipDelay)
+            SceneManager.LoadScene(sceneToChangeTo);
+        else
+            StartCoroutine(WaitFor(changeSceneDelay, sceneToChangeTo));
     }
 
     IEnumerator WaitFor(float duration, int scene)

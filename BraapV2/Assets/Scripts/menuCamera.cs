@@ -20,21 +20,16 @@ public AudioClip braap;
 	public GameObject yel;
 	public GameObject fifty;
 	public GameObject twoFifty;
-    public GameObject fbManager;
 
 	void Start ()
 	{
-        fbManager = GameObject.Find("FacebookAndPlayFabManager");
-        fbManager.GetComponent<SampleScene>().setup();
 		anim = GameObject.Find("menuSledObj").GetComponent<Animator>();
-		optionsLoader ();
 	}
 
 	public void startAnim(){
 		if (!animStarted) {
 			anim.SetBool("startClicked", true);
 			animStarted = true;
-
 		}
 	}
 
@@ -46,8 +41,7 @@ public AudioClip braap;
 	}
 
 	public void highScoreReset(){
-	PlayerPrefs.SetFloat("highScore", 0);
-		optionsLoader ();
+	    PlayerPrefs.SetFloat("highScore", 0);
 	}
 
 	public void sledColorFunc(int num){
@@ -76,26 +70,6 @@ public AudioClip braap;
 				PlayerPrefs.SetInt ("superSled", 1);
 				superSledButton.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 1f);
 			}
-		}
-	}
-
-	public void optionsLoader(){
-		highScore = PlayerPrefs.GetFloat ("highScore"); 
-		sledColor = PlayerPrefs.GetInt ("sledColor");
-		superSledInt = PlayerPrefs.GetInt ("superSled");
-
-        highScore = (int)highScore;
-		highScoreText.text = highScore.ToString ();
-		if (highScore >= 50.0f) {
-			fifty.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 1f);
-
-			red.GetComponent<Image> ().color = new Color (1f, 0f, 0f, 1f);
-			blue.GetComponent<Image> ().color = new Color (0f, 0f, 1f, 1f);
-			yel.GetComponent<Image> ().color = new Color (1f, 1f, 0f, 1f);
-		}
-		if (highScore >= 250.0f) {
-			twoFifty.GetComponent<Image> ().color = new Color (1f, 1f, 1f, 1f);
-
 		}
 	}
 }

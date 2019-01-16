@@ -130,13 +130,11 @@ private bool noDoubleRiver = true;
 				}
 			}
 		}
-
-			
-
 	}
 
 public void unPause(){
-	if (paused) {
+	if (paused)
+    {
 		paused = false;
 	} 
 }
@@ -150,51 +148,23 @@ public void unPause(){
 		treeCount++;
 		if (treeCount == totalTrees)
 			treeCount = 0;
-
-			/*obstacleNum = Random.Range (1, 4);
-			if (obstacleNum == 1) {
-			} else if (obstacleNum == 2) {
-			//	GameObject tree = Instantiate (tree2, new Vector3 (xLocation, 
-			//		                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} else if (obstacleNum == 3) {
-			//	GameObject tree = Instantiate (tree3, new Vector3 (xLocation, 
-				//	                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} else  {
-			//	GameObject tree = Instantiate (tree4, new Vector3 (xLocation, 
-				//	                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} */
 	}
+
 	void rightTreeSpawner ()
 	{
-		
-			xLocation = 30f;
-			Debug.Log ("right tree");
-			yLocation = Random.Range (-yTolerance, yTolerance);
+		xLocation = 30f;
+		Debug.Log ("right tree");
+		yLocation = Random.Range (-yTolerance, yTolerance);
 
 		treeArr[treeCount].transform.position =  new Vector3 (xLocation, 
 			target.position.y + yLocation + yOffset, target.position.z);
 		treeCount++;
+
 		if (treeCount == totalTrees)
 			treeCount = 0;
-		/*
-			obstacleNum = Random.Range (1, 4);
-			if (obstacleNum == 1) {
-			//	GameObject tree = Instantiate (tree1Prefab, new Vector3 (xLocation, 
-			//		                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} else if (obstacleNum == 2) {
-			//	GameObject tree = Instantiate (tree2, new Vector3 (xLocation, 
-			//		                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} else if (obstacleNum == 3) {
-			//	GameObject tree = Instantiate (tree3, new Vector3 (xLocation, 
-				//	                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} else  {
-			//	GameObject tree = Instantiate (tree4, new Vector3 (xLocation, 
-				//	                  target.position.y + yLocation + yOffset, target.position.z), Quaternion.identity) as GameObject;
-			} */ 
 	}
 	void leftTreeSpawner ()
 	{
-		
 			xLocation = -30f;
 			Debug.Log ("left tree");
 			yLocation = Random.Range (-yTolerance, yTolerance);

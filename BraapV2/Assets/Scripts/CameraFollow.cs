@@ -62,8 +62,8 @@ private bool adShowed = false;
 			rect.y = 0;
 
 			camera.rect = rect;
-		}*/
-
+		}
+        */
 	}
 	
 	// Update is called once per frame
@@ -92,28 +92,6 @@ private bool adShowed = false;
 			paused = false;
 		} 
 	}
-
-	public void audioSettingCaller (int val)
-	{//audio on
-		if (val == 0) {
-			if (!crashed) {
-                GetComponent<AudioSource>().Play();
-                GetComponent<AudioSource> ().volume = audioFloatValue;
-			}
-			audioText.text = "Audio ON";
-		} else if (val == 1) 
-		{ // bg music mute, braap still on
-			GetComponent<AudioSource> ().volume = 0f;
-			audioText = GameObject.Find("audioButtonText").GetComponent<Text>();
-			audioText.text = "Sound FX ON";
-		} else if (val == 2) 
-		{
-			GetComponent<AudioSource> ().volume = 0f;
-			audioText = GameObject.Find("audioButtonText").GetComponent<Text>();
-			audioText.text = "MUTED";
-		}
-	}
-
 
 IEnumerator WaitFor(float duration){
 	yield return new WaitForSecondsRealtime(duration);

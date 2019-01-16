@@ -10,17 +10,13 @@ public class creditScript : MonoBehaviour {
 	public GameObject camera;
 	public Text audioButtonText;
 	public Text highScoreString;
-	public GameObject facebookPanel;
+	//public GameObject facebookPanel;
 	private float highScore;
 	private int sledColor;
 
 void Start ()
 {
 		highScore = PlayerPrefs.GetFloat ("highScore"); //get saved highscore
-		facebookPanel = GameObject.Find("facebookLoginButton");
-		if (facebookPanel.GetComponent<facebook> ().fbLoggedIn == true) {
-			highScoreString = facebookPanel.GetComponent<facebook> ().userScoreText;
-		}
 }
 	
 public void openOptions (){
@@ -29,13 +25,12 @@ public void openOptions (){
 
 		options.SetActive(true);
 		optionsOpen = true;
-
+        GameObject.Find("manager").GetComponent<GameManager>().GetLocalHighscore();
 	} else if (optionsOpen){
 		optionsOpen = false;
 		options.SetActive (false);
 	}
 }
-
 
 	public void audioSettingCaller (int num)
 	{//audio on
@@ -44,15 +39,15 @@ public void openOptions (){
 			if (audioSettingIntValue == 3) {
 				audioSettingIntValue = 0;
 			}
-		} else if (num == 73) {
+		} else if (num == 73)
+        {
+            ;
 		} else {
 			audioSettingIntValue = num;
 		}
 
-		if (audioSettingIntValue == 0) {
-			
+		if (audioSettingIntValue == 0) {		
 			camera.GetComponent<AudioSource> ().volume = 0.8f;
-	
 			audioButtonText.text = "Audio ON";
 			PlayerPrefs.SetInt ("audioSelector", 0);
 		} else if (audioSettingIntValue == 1) { // bg music mute, braap still on
@@ -80,4 +75,28 @@ public void openOptions (){
 			}
 		}	
 	}
+
+    public int color;
+    public void SetColor()
+    {
+        if (highScore >= 50)
+        {
+            GameObject.Find("manager").GetComponent<GameManager>().SetSledColor(color);
+            if (color == 1)
+            {
+                sledColor = 1;
+                
+            }
+            else if (color == 2)
+            {
+                sledColor = 2;
+                
+            }
+            else
+            {
+                sledColor = 0;
+                
+            }
+        } 
+    }
 }

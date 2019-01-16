@@ -15,12 +15,11 @@ public class resetButton : MonoBehaviour {
 		
 	}
 	public void reset(){
-		GameObject.FindGameObjectWithTag ("manager").GetComponent<levelManager> ().reset ();
+		GameObject.Find("manager").GetComponent<GameManager>().ResetGame();
 	}
 
-    public void changeTo2()
+    public void ChangeToScene(int num)
     {
-
-        GameObject.FindGameObjectWithTag("manager").GetComponent<levelManager>().ChangeToScene(2);
+        GameObject.Find("manager").GetComponent<levelManager>().ChangeToScene(0);
     }
 }
