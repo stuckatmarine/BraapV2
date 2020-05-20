@@ -4,6 +4,6 @@
 - Standalong app runs great
 
 ## Screenshots
-![GitHub Logo](/main.jpeg)
-![GitHub Logo](/loading.jpeg)
-![GitHub Logo](/run.jpeg)
+![GitHub Logo](/main.jpg)
+![GitHub Logo](/loading.jpg)
+![GitHub Logo](/run.jpg)
