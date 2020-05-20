@@ -1,7 +1,8 @@
 # BraapV2
-- Snowmobile endless runnner
-- Project stalled since Facebook pulled API support
-- Standalong app runs great
+- Snowmobile endless runner created using Unity
+- The project is stalled since Facebook pulled API support
+- Former iOS Testflight and Google Play store Beta App
+
 
 ## Screenshots
 ![GitHub Logo](/main.jpg)
